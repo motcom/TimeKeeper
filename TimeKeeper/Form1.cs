@@ -55,9 +55,14 @@ namespace TimeKeeper
         private void btn_start_Click(object sender, EventArgs e)
         {
             DGV_day_file_time.Rows.Clear();
+            string dir_path = TB_Path.Text;
+            if (!Directory.Exists(dir_path)){
+                MessageBox.Show("入力されたパスのディレクトリはありません");
+                return; }
             file_scaning(new DirectoryInfo(TB_Path.Text));
             List<DateTime> time_keer_dict_keys = time_keeper_dict.Keys.ToList();
             time_keer_dict_keys.Sort();
+
             foreach (DateTime k in time_keer_dict_keys)
             {
                 // その日作ったファイルのリスト
